@@ -38,6 +38,29 @@ function createRandomCircle() {
     document.body.appendChild(newCircle);
 }
 
+function triggerWipe() {
+    const wipeElement = document.createElement('div');
+    wipeElement.classList.add('wipe'); // Add class that contains  animation
+
+    // Set position of wipe element to match circle position
+    const rect = circle.getBoundingClientRect();
+    wipeElement.style.left = `${rect.left - 25}px`;  // Center wipe over circle
+    wipeElement.style.top = `${rect.top - 25}px`;
+
+    // Append the wipe element to body
+    document.body.appendChild(wipeElement);
+
+    // Remove the wipe element after animation
+    wipeElement.addEventListener('animationend', () => {
+        wipeElement.remove();
+    });
+}
+
+circle.addEventListener('click', () => {
+    moveCircle();
+    triggerWipe();  // Trigger wipe animation
+});
+
 // Add click event listener 
 circle.addEventListener('click', moveCircle);
 
@@ -50,3 +73,4 @@ window.addEventListener('load', () => {
         createRandomCircle();  
     }
 });
+
