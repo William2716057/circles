@@ -61,7 +61,7 @@ wipe {
 
     100% {
         top: 0;
-        opacity: 0; /* Make disappear at the end */
+        
     }
 }
 
