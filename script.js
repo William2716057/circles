@@ -1,71 +1,52 @@
-
-// Generate random number
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function moveOtherCircle() {
-    // create random diameter 
-    const newDiameter = getRandomInt(10, 50);
-
-    // set other diameter
-    other.style.width = `${newDiameter}px`;
-    other.style.height = `${newDiameter}px`;
-
-    // new random position
-    const maxX = window.innerWidth - newDiameter;
-    const maxY = window.innerHeight - newDiameter;
-
-    const randomX = getRandomInt(0, maxX);
-    const randomY = getRandomInt(0, maxY);
-
-    // set position
-    other.style.left = `${randomX}px`;
-    other.style.top = `${randomY}px`;
-}
-
-
-function otherPos() {
-    const newDiameter = getRandomInt(10, 50);
-    circle.style.width = `${newDiameter}px`;
-    circle.style.height = `${newDiameter}px`
-    const maxX = window.innerWidth - newDiameter;
-    const maxY = window.innerHeight - newDiameter;
-
-    const randomX = getRandomInt(0, maxX);
-    const randomY = getRandomInt(0, maxY);
-
-    circle.style.left = `${randomX}px`;
-    circle.style.top = `${randomY}px`;
-}
-// move circle to random position
+// Move the clickable circle to random position and size
 function moveCircle() {
-    // create random diameter
     const newDiameter = getRandomInt(10, 50);
-
-    // set new circle diameter
     circle.style.width = `${newDiameter}px`;
     circle.style.height = `${newDiameter}px`;
 
-    // new random position
     const maxX = window.innerWidth - newDiameter;
     const maxY = window.innerHeight - newDiameter;
 
     const randomX = getRandomInt(0, maxX);
     const randomY = getRandomInt(0, maxY);
 
-    // set position of new circle
     circle.style.left = `${randomX}px`;
     circle.style.top = `${randomY}px`;
 }
 
-// add click event listener 
+// Create a random circle element and append
+function createRandomCircle() {
+    const newCircle = document.createElement('div');  // Create new <div> element
+    const diameter = getRandomInt(10, 50);  
+    const randomX = getRandomInt(0, window.innerWidth - diameter);
+    const randomY = getRandomInt(0, window.innerHeight - diameter);
+
+    // Set styles for 
+    newCircle.style.width = `${diameter}px`;
+    newCircle.style.height = `${diameter}px`;
+    newCircle.style.position = 'absolute';
+    newCircle.style.borderRadius = '50%';  // fix
+    newCircle.style.backgroundColor = '#3498db';  // fix
+    newCircle.style.left = `${randomX}px`;
+    newCircle.style.top = `${randomY}px`;
+
+    // Append the new circle 
+    document.body.appendChild(newCircle);
+}
+
+// Add click event listener 
 circle.addEventListener('click', moveCircle);
 
-// initial circle position on page load
-//moveCircle();
-
+// Initial positions on page load
 window.addEventListener('load', () => {
-    moveCircle();  // initial circle position on page load
-    moveOtherCircle();  // other circle position on page load
+    moveCircle();  // Position clickable circle
+
+    // create random circles given number of times
+    for (let i = 0; i < 5; i++) {
+        createRandomCircle();  
+    }
 });
