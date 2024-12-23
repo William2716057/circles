@@ -1,4 +1,3 @@
-const circle = document.getElementById('circle');
 
 // Generate random number
 function getRandomInt(min, max) {
